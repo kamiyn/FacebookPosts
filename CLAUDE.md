@@ -19,3 +19,9 @@ hugo-blog-content-candidate/ にある Hugo post を 書籍に関する感想・
 - hugo-blog-content-candidate/ : 書籍に関する感想・批評が確実に含まれる
 - hugo-blog-content-suspicious-candidate/ : 書籍に関する感想・批評が含まれる可能性がある
 - hugo-blog-content-nonpublish/ : 書籍に関する感想・批評が含まれない
+
+hugo-blog-content-suspicious-candidate/ : 書籍に関する感想・批評が含まれる可能性がある
+にあるものを人間が内容を確認して
+hugo-blog/content/posts に移動するようなアプリケーションを作成
+
+MarkDownファイルを表示し、 1ならば hugo-blog/content/posts に移動 、 0ならば hugo-blog-content-nonpublish/ に移動するようなインターフェースを提供してください
