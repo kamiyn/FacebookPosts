@@ -1,0 +1,27 @@
+# Hugo ビルド出力
+/public/
+/resources/_gen/
+
+# Hugo キャッシュ
+/.hugo_build.lock
+
+# OS ファイル
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Facebook 元データ（プライバシー保護のため除外）
+/your_facebook_activity/
+
+# Node.js
+node_modules/
+package-lock.json
+
+# ローカル設定
+.env
+.env.local

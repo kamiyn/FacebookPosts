@@ -1,0 +1,27 @@
+baseURL = 'https://your-username.github.io/facebook-blog/'
+languageCode = 'ja'
+title = 'Facebook Archive Blog'
+theme = 'ananke'
+
+[params]
+  author = "Facebook Archive"
+  description = "Facebook 投稿アーカイブ"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[pagination]
+  pagerSize = 20
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "投稿一覧"
+    url = "/posts/"
+    weight = 10

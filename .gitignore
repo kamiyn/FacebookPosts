@@ -1,1 +1,22 @@
-your_facebook_activity
+# Facebook 元データ（プライバシー保護のため除外）
+your_facebook_activity/
+hugo-blog-content-candidate/
+hugo-blog-content-suspicious-candidate/
+hugo-blog-content-nonpublish/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS ファイル
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
