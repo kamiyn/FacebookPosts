@@ -44,6 +44,22 @@ PUBLISHER_DOMAINS = [
     'www.iwanami.co.jp',
     'www.h-up.com',
     'www.nakanishiya.co.jp',
+    'www.php.co.jp/books',
+    'www.heibonsha.co.jp/book',
+    'www.oreilly.co.jp',
+    'www.lambdanote.com',
+    'www.asukashinsha.co.jp',
+    'www.e-hon.ne.jp',
+    'www.hakuyo-sha.co.jp',
+    'www.keio-up.co.jp/np/isbn',
+    'www.kawade.co.jp',
+    'www.kadokawa.co.jp',
+    'filmart.co.jp/books',
+    'www.intershift.jp',
+    'www.tokuma.jp/book',
+    'publications.asahi.com',
+    'bungaku-report.com/books',
+    'www.hakusuisha.co.jp',
 ]
 
 
