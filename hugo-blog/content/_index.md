@@ -1,5 +1,5 @@
 ---
-title: "Facebook Archive Blog"
+title: "kamiyn Book Log"
 ---
 
-Facebook の投稿アーカイブです。
+Facebook に投稿していた読書記録です。

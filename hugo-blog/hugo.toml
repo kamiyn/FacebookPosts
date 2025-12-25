@@ -1,11 +1,11 @@
 baseURL = 'https://your-username.github.io/facebook-blog/'
 languageCode = 'ja'
-title = 'Facebook Archive Blog'
+title = 'kamiyn Book Log'
 theme = 'ananke'
 
 [params]
-  author = "Facebook Archive"
-  description = "Facebook 投稿アーカイブ"
+  author = "kamiyn"
+  description = "kamiyn Book Log"
 
 [markup]
   [markup.goldmark]
