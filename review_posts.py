@@ -78,6 +78,21 @@ PUBLISHER_DOMAINS = [
     'dobunkan.co.jp',
     'www.jikushuppan.co.jp',
     'www.9640.jp',
+    'www.kress-jp.com',
+    'www.maruzen-publishing.co.jp',
+    'pub.hozokan.co.jp',
+    'www.tokyo-shoseki.co.jp',
+    'www.nhk-book.co.jp',
+    'www.seikaisha.co.jp',
+    'honto.jp',
+    'bungaku-report.com',
+    'www.seikyusha.co.jp',
+    'www.xknowledge.co.jp',
+    'www.gaiajapan.co.jp/books',
+    'bookpub.jiji.com',
+    'www.minervashobo.co.jp',
+    'www.natsume.co.jp',
+    'www.tokyo-shoseki.co.jp',
 ]
 
 
