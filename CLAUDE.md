@@ -25,3 +25,37 @@ hugo-blog-content-suspicious-candidate/ : 書籍に関する感想・批評が�
 hugo-blog/content/posts に移動するようなアプリケーションを作成
 
 MarkDownファイルを表示し、 1ならば hugo-blog/content/posts に移動 、 0ならば hugo-blog-content-nonpublish/ に移動するようなインターフェースを提供してください
+
+review_posts.py
+URLに以下公式サイトへのリンク文字列が含まれるものは自動的にhugo-blog/content/posts に移動させる
+
+公式サイトへのリンク
+
+```
+www.chikumashobo.co.jp
+www.kinokuniya.co.jp
+www.shinchosha.co.jp
+books.bunshun.jp
+www.chuko.co.jp
+www.kaitakusha.co.jp
+bookclub.kodansha.co.jp
+www.shoeisha.co.jp
+gihyo.jp
+www.diamond.co.jp/book
+www.borndigital.co.jp/book
+www.kotensinyaku.jp/books
+www.msz.co.jp/book
+www.shobunsha.co.jp
+www.kobunsha.com
+www.eastpress.co.jp
+www.kashiwashobo.co.jp
+www.sbcr.jp
+yasakashobo.co.jp
+book.mynavi.jp
+www.kokusho.co.jp
+www.utp.or.jp
+www.beret.co.jp
+www.iwanami.co.jp
+www.h-up.com
+www.nakanishiya.co.jp
+```

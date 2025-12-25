@@ -2,9 +2,13 @@
 """
 書籍に関する感想・批評が含まれるかを人間が確認して振り分けるアプリケーション
 
+機能:
+  - 出版社サイトへのURLが含まれる投稿は自動的に公開フォルダに移動
+  - それ以外は手動で確認して振り分け
+
 操作方法:
   1 : hugo-blog/content/posts に移動（公開）
-  0 : hugo-blog-content-nonpublish/ に移動（非公開）
+  2 : hugo-blog-content-nonpublish/ に移動（非公開）
   s : スキップ（後で確認）
   q : 終了
 """
@@ -12,6 +16,35 @@
 import os
 import shutil
 from pathlib import Path
+
+PUBLISHER_DOMAINS = [
+    'www.chikumashobo.co.jp',
+    'www.kinokuniya.co.jp',
+    'www.shinchosha.co.jp',
+    'books.bunshun.jp',
+    'www.chuko.co.jp',
+    'www.kaitakusha.co.jp',
+    'bookclub.kodansha.co.jp',
+    'www.shoeisha.co.jp',
+    'gihyo.jp',
+    'www.diamond.co.jp/book',
+    'www.borndigital.co.jp/book',
+    'www.kotensinyaku.jp/books',
+    'www.msz.co.jp/book',
+    'www.shobunsha.co.jp',
+    'www.kobunsha.com',
+    'www.eastpress.co.jp',
+    'www.kashiwashobo.co.jp',
+    'www.sbcr.jp',
+    'yasakashobo.co.jp',
+    'book.mynavi.jp',
+    'www.kokusho.co.jp',
+    'www.utp.or.jp',
+    'www.beret.co.jp',
+    'www.iwanami.co.jp',
+    'www.h-up.com',
+    'www.nakanishiya.co.jp',
+]
 
 
 def clear_screen():
@@ -30,15 +63,23 @@ def get_pending_posts(source_dir: Path) -> list[Path]:
     return folders
 
 
-def display_post(post_dir: Path) -> str:
-    """投稿内容を表示"""
+def get_post_content(post_dir: Path) -> str:
+    """投稿内容を取得"""
     index_file = post_dir / 'index.md'
     if not index_file.exists():
-        return "(ファイルが見つかりません)"
+        return ""
 
     with open(index_file, 'r', encoding='utf-8') as f:
         content = f.read()
     return content
+
+
+def contains_publisher_url(content: str) -> bool:
+    """出版社サイトへのURLが含まれているかチェック"""
+    for domain in PUBLISHER_DOMAINS:
+        if domain in content:
+            return True
+    return False
 
 
 def move_post(post_dir: Path, dest_dir: Path):
@@ -53,6 +94,23 @@ def move_post(post_dir: Path, dest_dir: Path):
     return dest_path
 
 
+def auto_publish_by_url(posts: list[Path], publish_dir: Path) -> tuple[list[Path], int]:
+    """出版社URLを含む投稿を自動で公開フォルダに移動"""
+    remaining = []
+    auto_published = 0
+
+    for post in posts:
+        content = get_post_content(post)
+        if contains_publisher_url(content):
+            dest = move_post(post, publish_dir)
+            print(f"  自動公開: {post.name}")
+            auto_published += 1
+        else:
+            remaining.append(post)
+
+    return remaining, auto_published
+
+
 def main():
     base_dir = Path(__file__).parent
     source_dir = base_dir / 'hugo-blog-content-suspicious-candidate'
@@ -63,12 +121,6 @@ def main():
     print("書籍感想・批評 振り分けツール")
     print("=" * 60)
     print()
-    print("操作方法:")
-    print("  1 : hugo-blog/content/posts に移動（公開）")
-    print("  0 : hugo-blog-content-nonpublish/ に移動（非公開）")
-    print("  s : スキップ（後で確認）")
-    print("  q : 終了")
-    print()
 
     posts = get_pending_posts(source_dir)
 
@@ -76,7 +128,26 @@ def main():
         print("処理する投稿がありません。")
         return
 
-    print(f"処理待ち: {len(posts)} 件")
+    total_posts = len(posts)
+    print(f"処理待ち: {total_posts} 件")
+    print()
+
+    print("出版社サイトURLを含む投稿を自動振り分け中...")
+    posts, auto_published = auto_publish_by_url(posts, publish_dir)
+    print(f"  → 自動公開: {auto_published} 件")
+    print()
+
+    if not posts:
+        print("全件自動処理完了しました。")
+        return
+
+    print(f"手動確認が必要: {len(posts)} 件")
+    print()
+    print("操作方法:")
+    print("  1 : hugo-blog/content/posts に移動（公開）")
+    print("  2 : hugo-blog-content-nonpublish/ に移動（非公開）")
+    print("  s : スキップ（後で確認）")
+    print("  q : 終了")
     print()
     input("Enterキーを押して開始...")
 
@@ -97,12 +168,12 @@ def main():
         print("=" * 60)
         print()
 
-        content = display_post(post)
+        content = get_post_content(post)
         print(content)
 
         print()
         print("-" * 60)
-        print("1=公開 | 0=非公開 | s=スキップ | q=終了")
+        print("1=公開 | 2=非公開 | s=スキップ | q=終了")
         print("-" * 60)
 
         while True:
@@ -115,7 +186,7 @@ def main():
                 processed += 1
                 posts.pop(i)
                 break
-            elif choice == '0':
+            elif choice == '2':
                 dest = move_post(post, nonpublish_dir)
                 print(f"→ 非公開: {dest}")
                 nonpublished += 1
@@ -131,7 +202,8 @@ def main():
                 print()
                 print("=" * 60)
                 print("終了")
-                print(f"  処理済み: {processed} 件")
+                print(f"  自動公開: {auto_published} 件")
+                print(f"  手動処理: {processed} 件")
                 print(f"    公開: {published} 件")
                 print(f"    非公開: {nonpublished} 件")
                 print(f"  スキップ: {skipped} 件")
@@ -139,13 +211,15 @@ def main():
                 print("=" * 60)
                 return
             else:
-                print("1, 0, s, q のいずれかを入力してください")
+                print("1, 2, s, q のいずれかを入力してください")
 
     print()
     print("=" * 60)
     print("全件処理完了")
-    print(f"  公開: {published} 件")
-    print(f"  非公開: {nonpublished} 件")
+    print(f"  自動公開: {auto_published} 件")
+    print(f"  手動処理: {processed} 件")
+    print(f"    公開: {published} 件")
+    print(f"    非公開: {nonpublished} 件")
     print(f"  スキップ: {skipped} 件")
     print("=" * 60)
 
