@@ -191,6 +191,15 @@ PUBLISHER_DOMAINS = [
     'www.pot.co.jp/books',
     'www.webdoku.jp/kanko/page',
     'www.bun-ichi.co.jp',
+    'www.gakuyo.co.jp/book',
+    'www.heibonsha.co.jp',
+    'www.hyoronsha.co.jp',
+    'pie.co.jp/book',
+    'www.medicalview.co.jp/catalog',
+    'www.org.kobe-u.ac.jp/kupress',
+    'www.chugaiigaku.jp/item',
+    'www.juse-p.co.jp/products',
+    'press.geidai.ac.jp',
 ]
 
 
@@ -260,7 +269,8 @@ def auto_publish_by_url(posts: list[Path], publish_dir: Path) -> tuple[list[Path
 
 def main():
     base_dir = Path(__file__).parent
-    source_dir = base_dir / 'hugo-blog-content-suspicious-candidate'
+    source_dir = base_dir / 'hugo-blog-content-candidate'
+    # source_dir = base_dir / 'hugo-blog-content-suspicious-candidate'
     publish_dir = base_dir / 'hugo-blog' / 'content' / 'posts'
     nonpublish_dir = base_dir / 'hugo-blog-content-nonpublish'
 
