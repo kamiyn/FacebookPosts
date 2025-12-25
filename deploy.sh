@@ -4,7 +4,7 @@
 
 set -e
 
-HUGO_VERSION="0.128.0"
+HUGO_VERSION="0.147.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HUGO_BLOG_DIR="${SCRIPT_DIR}/hugo-blog"
 
@@ -27,12 +27,17 @@ error() {
     exit 1
 }
 
-# Hugo がインストールされているか確認
+# Hugo がインストールされているか確認（バージョンもチェック）
 check_hugo() {
     if command -v hugo &> /dev/null; then
         INSTALLED_VERSION=$(hugo version | grep -oP 'v\K[0-9]+\.[0-9]+\.[0-9]+' | head -1)
         info "Hugo version ${INSTALLED_VERSION} is installed"
-        return 0
+        if [[ "${INSTALLED_VERSION}" == "${HUGO_VERSION}" ]]; then
+            return 0
+        else
+            warn "Required version is ${HUGO_VERSION}, upgrading..."
+            return 1
+        fi
     else
         warn "Hugo is not installed"
         return 1
