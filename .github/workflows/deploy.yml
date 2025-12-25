@@ -25,6 +25,7 @@ concurrency:
 defaults:
   run:
     shell: bash
+    working-directory: hugo-blog
 
 jobs:
   # ビルドジョブ
@@ -65,7 +66,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./hugo-blog/public
 
   # デプロイジョブ
   deploy:
