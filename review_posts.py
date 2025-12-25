@@ -133,6 +133,19 @@ PUBLISHER_DOMAINS = [
     'www.kaiseisha.co.jp',
     'www.shogakukan.co.jp',
     'www.ongakunotomo.co.jp',
+    'book.impress.co.jp',
+    'www.kindaikagaku.co.jp',
+    'www.tokyodoshuppan.com',
+    'www.canaria-book.com',
+    'suiyosha.hondana.jp',
+    'www.yamakawa.co.jp',
+    'www.akashi.co.jp',
+    'jiritsushobo.co.jp',
+    'www.web-nippyo.jp',
+    'www.unp.or.jp/ISBN',
+    'bunkyosha.com/books',
+    'www.hituzi.co.jp',
+    'www.hayakawabooks.com',
 ]
 
 
